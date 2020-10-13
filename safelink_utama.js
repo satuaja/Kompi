@@ -1,1 +1,32 @@
-var Base64={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",encode:function(t){var e,r,o,n,a,c,d,i="",h=0;for(t=Base64._utf8_encode(t);h<t.length;)n=(e=t.charCodeAt(h++))>>2,a=(3&e)<<4|(r=t.charCodeAt(h++))>>4,c=(15&r)<<2|(o=t.charCodeAt(h++))>>6,d=63&o,isNaN(r)?c=d=64:isNaN(o)&&(d=64),i=i+this._keyStr.charAt(n)+this._keyStr.charAt(a)+this._keyStr.charAt(c)+this._keyStr.charAt(d);return i},decode:function(t){var e,r,o,n,a,c,d="",i=0;for(t=t.replace(/[^A-Za-z0-9\+\/\=]/g,"");i<t.length;)e=this._keyStr.indexOf(t.charAt(i++))<<2|(n=this._keyStr.indexOf(t.charAt(i++)))>>4,r=(15&n)<<4|(a=this._keyStr.indexOf(t.charAt(i++)))>>2,o=(3&a)<<6|(c=this._keyStr.indexOf(t.charAt(i++))),d+=String.fromCharCode(e),64!=a&&(d+=String.fromCharCode(r)),64!=c&&(d+=String.fromCharCode(o));return d=Base64._utf8_decode(d)},_utf8_encode:function(t){t=t.replace(/\r\n/g,"\n");for(var e="",r=0;r<t.length;r++){var o=t.charCodeAt(r);o<128?e+=String.fromCharCode(o):o>127&&o<2048?(e+=String.fromCharCode(o>>6|192),e+=String.fromCharCode(63&o|128)):(e+=String.fromCharCode(o>>12|224),e+=String.fromCharCode(o>>6&63|128),e+=String.fromCharCode(63&o|128))}return e},_utf8_decode:function(t){for(var e="",r=0,o=c1=c2=0;r<t.length;)(o=t.charCodeAt(r))<128?(e+=String.fromCharCode(o),r++):o>191&&o<224?(c2=t.charCodeAt(r+1),e+=String.fromCharCode((31&o)<<6|63&c2),r+=2):(c2=t.charCodeAt(r+1),c3=t.charCodeAt(r+2),e+=String.fromCharCode((15&o)<<12|(63&c2)<<6|63&c3),r+=3);return e}},encode=document.getElementById("encode"),decode=document.getElementById("decode"),output=document.getElementById("output"),input=document.getElementById("input"),User_ID="",protected_links="",a_to_va=0,a_to_vb=0,a_to_vc="";function auto_safelink(){auto_safeconvert()}function auto_safeconvert(){var t=window.location.hostname;""==protected_links||protected_links.match(t)?""==protected_links&&(protected_links=t):protected_links+=", "+t;var e,r="",o=new Array;r=document.getElementsByTagName("a"),a_to_va=r.length,e=(o=a_to_fa()).length;for(var n=!1,a=0,c="",d=0;d<a_to_va;d++){for(n=!1,a=0;0==n&&a<e;)!(c=r[d].href).match(o[a])&&c&&c.match("http")||(n=!0),a++;if(0==n){var i=Base64.encode(c),h=null;"1"==Math.floor(1*Math.random()+1)&&(h="safelink-1.html"),r[d].href="https://satuaja-safelink.blogspot.com/2019/11/"+h+"?url="+i,r[d].rel="nofollow",a_to_vb++,a_to_vc+=d+":::"+r[d].href+"\n"}}var _=document.getElementById("anonyminized"),f=document.getElementById("found_links");_&&(_.innerHTML+=a_to_vb),f&&(f.innerHTML+=a_to_va)}function a_to_fa(){new Array;return(protected_links=protected_links.replace(" ","")).split(",")}
+var Base64={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",encode:function(input){var output="";var chr1,chr2,chr3,enc1,enc2,enc3,enc4;var i=0;input=Base64._utf8_encode(input);while(i<input.length){chr1=input.charCodeAt(i++);chr2=input.charCodeAt(i++);chr3=input.charCodeAt(i++);enc1=chr1>>2;enc2=((chr1&3)<<4)|(chr2>>4);enc3=((chr2&15)<<2)|(chr3>>6);enc4=chr3&63;if(isNaN(chr2)){enc3=enc4=64;}else if(isNaN(chr3)){enc4=64;}
+output=output+ this._keyStr.charAt(enc1)+ this._keyStr.charAt(enc2)+ this._keyStr.charAt(enc3)+ this._keyStr.charAt(enc4);}
+return output;},decode:function(input){var output="";var chr1,chr2,chr3;var enc1,enc2,enc3,enc4;var i=0;input=input.replace(/[^A-Za-z0-9\+\/\=]/g,"");while(i<input.length){enc1=this._keyStr.indexOf(input.charAt(i++));enc2=this._keyStr.indexOf(input.charAt(i++));enc3=this._keyStr.indexOf(input.charAt(i++));enc4=this._keyStr.indexOf(input.charAt(i++));chr1=(enc1<<2)|(enc2>>4);chr2=((enc2&15)<<4)|(enc3>>2);chr3=((enc3&3)<<6)|enc4;output=output+ String.fromCharCode(chr1);if(enc3!=64){output=output+ String.fromCharCode(chr2);}
+if(enc4!=64){output=output+ String.fromCharCode(chr3);}}
+output=Base64._utf8_decode(output);return output;},_utf8_encode:function(string){string=string.replace(/\r\n/g,"\n");var utftext="";for(var n=0;n<string.length;n++){var c=string.charCodeAt(n);if(c<128){utftext+=String.fromCharCode(c);}
+else if((c>127)&&(c<2048)){utftext+=String.fromCharCode((c>>6)|192);utftext+=String.fromCharCode((c&63)|128);}
+else{utftext+=String.fromCharCode((c>>12)|224);utftext+=String.fromCharCode(((c>>6)&63)|128);utftext+=String.fromCharCode((c&63)|128);}}
+return utftext;},_utf8_decode:function(utftext){var string="";var i=0;var c=c1=c2=0;while(i<utftext.length){c=utftext.charCodeAt(i);if(c<128){string+=String.fromCharCode(c);i++;}
+else if((c>191)&&(c<224)){c2=utftext.charCodeAt(i+ 1);string+=String.fromCharCode(((c&31)<<6)|(c2&63));i+=2;}
+else{c2=utftext.charCodeAt(i+ 1);c3=utftext.charCodeAt(i+ 2);string+=String.fromCharCode(((c&15)<<12)|((c2&63)<<6)|(c3&63));i+=3;}}
+return string;}}
+var encode=document.getElementById('encode'),decode=document.getElementById('decode'),output=document.getElementById('output'),input=document.getElementById('input');var User_ID="";var protected_links="";var a_to_va=0;var a_to_vb=0;var a_to_vc="";function auto_safelink(){auto_safeconvert();}
+function auto_safeconvert(){var a_to_vd=window.location.hostname;if(protected_links!=""&&!protected_links.match(a_to_vd)){protected_links+=", "+ a_to_vd;}else if(protected_links=="")
+{protected_links=a_to_vd;}
+var a_to_ve="";var a_to_vf=new Array();var a_to_vg=0;a_to_ve=document.getElementsByTagName("a");a_to_va=a_to_ve.length;a_to_vf=a_to_fa();a_to_vg=a_to_vf.length;var a_to_vh=false;var j=0;var a_to_vi="";for(var i=0;i<a_to_va;i++)
+{a_to_vh=false;j=0;while(a_to_vh==false&&j<a_to_vg)
+{a_to_vi=a_to_ve[i].href;if(a_to_vi.match(a_to_vf[j])||!a_to_vi||!a_to_vi.match("http"))
+{a_to_vh=true;}
+j++;}
+if(a_to_vh==false)
+{var encryptedUrl=Base64.encode(a_to_vi);
+var x=Math.floor((Math.random()*3)+ 1);
+var xxx=null;
+if(x=="1"){xxx="understanding-online-loans.html"}
+if(x=="2"){xxx="how-experienced-lic-agent-can-help-you.html"}
+if(x=="3"){xxx="how-we-modernize-edi-process-with.html"}a_to_ve[i].href="https://satuaja-safelink.blogspot.com/2020/10/"+xxx+"?url="+ encryptedUrl;a_to_ve[i].rel="nofollow";a_to_vb++;a_to_vc+=i+":::"+ a_to_ve[i].href+"\n";}}
+var a_to_vj=document.getElementById("anonyminized");var a_to_vk=document.getElementById("found_links");if(a_to_vj)
+{a_to_vj.innerHTML+=a_to_vb;}
+if(a_to_vk)
+{a_to_vk.innerHTML+=a_to_va;}}
+function a_to_fa()
+{var a_to_vf=new Array();protected_links=protected_links.replace(" ","");a_to_vf=protected_links.split(",");return a_to_vf;}
